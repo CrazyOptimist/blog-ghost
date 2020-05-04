@@ -6,7 +6,9 @@ services:
     image: ghost:latest
     restart: always
     ports:
-      - 2368:2368
+      - '2368:2368'
+    volumes: 
+      - './ghost_content/:/var/lib/ghost/content/'
     environment:
       # see https://docs.ghost.org/docs/config#section-running-ghost-with-config-env-variables
       url: ${APP_HOST_URL}
@@ -26,7 +28,7 @@ services:
         '--collation-server=utf8_general_ci'
     ]
     volumes:
-      - ./db_data:/var/lib/mysql
+      - './db_data:/var/lib/mysql'
     environment:
       MYSQL_DATABASE: ${APP_DATABASE}
       MYSQL_ROOT_PASSWORD: ${APP_DB_ROOT_PASSWORD}
