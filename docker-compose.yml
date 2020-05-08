@@ -15,7 +15,8 @@ services:
       database__connection__database: ${APP_DATABASE}
     volumes:
       - "./ghost_content/:/var/lib/ghost/content/"
-    depends_on: db
+    depends_on:
+      - db
     restart: always
 
   db:
