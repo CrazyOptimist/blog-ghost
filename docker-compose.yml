@@ -3,11 +3,9 @@ version: "3"
 services:
   ghost:
     image: ghost:3.15-alpine
-    restart: always
+    container_name: ghost_app
     ports:
       - "2368:2368"
-    volumes:
-      - "./ghost_content/:/var/lib/ghost/content/"
     environment:
       url: ${APP_HOST_URL}
       database__client: mysql
@@ -15,9 +13,14 @@ services:
       database__connection__user: ${APP_DB_USER}
       database__connection__password: ${APP_DB_PASSWORD}
       database__connection__database: ${APP_DATABASE}
+    volumes:
+      - "./ghost_content/:/var/lib/ghost/content/"
+    depends_on: db
+    restart: always
 
   db:
     image: mysql:8.0
+    container_name: database
     ports:
       - "3306:3306"
     command:
