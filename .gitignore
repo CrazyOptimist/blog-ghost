@@ -1,4 +1,6 @@
 # Environment files
 .env
 
-# Database files
+# Data files
+ghost_content
+db_data

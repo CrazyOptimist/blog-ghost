@@ -1,16 +1,14 @@
-version: '3'
+version: "3"
 
 services:
-
   ghost:
-    image: ghost:latest
+    image: ghost:3.15-alpine
     restart: always
     ports:
-      - '2368:2368'
-    volumes: 
-      - './ghost_content/:/var/lib/ghost/content/'
+      - "2368:2368"
+    volumes:
+      - "./ghost_content/:/var/lib/ghost/content/"
     environment:
-      # see https://docs.ghost.org/docs/config#section-running-ghost-with-config-env-variables
       url: ${APP_HOST_URL}
       database__client: mysql
       database__connection__host: db
@@ -19,16 +17,17 @@ services:
       database__connection__database: ${APP_DATABASE}
 
   db:
-    image: mysql:latest
+    image: mysql:8.0
     ports:
-      - 3306:3306
-    command: [
-        '--default_authentication_plugin=mysql_native_password',
-        '--character-set-server=utf8',
-        '--collation-server=utf8_general_ci'
-    ]
+      - "3306:3306"
+    command:
+      [
+        "--default_authentication_plugin=mysql_native_password",
+        "--character-set-server=utf8",
+        "--collation-server=utf8_general_ci",
+      ]
     volumes:
-      - './db_data:/var/lib/mysql'
+      - "./db_data:/var/lib/mysql"
     environment:
       MYSQL_DATABASE: ${APP_DATABASE}
       MYSQL_ROOT_PASSWORD: ${APP_DB_ROOT_PASSWORD}
