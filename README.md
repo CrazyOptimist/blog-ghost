@@ -1,6 +1,6 @@
 # Crazy Optimist's Blog
 
-https://crazyoptimist.tk
+https://www.crazyoptimist.net
 
 ## Env Settings
 
